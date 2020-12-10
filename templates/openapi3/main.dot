@@ -83,9 +83,9 @@
 ### Properties
 {{?}}
 
-{{? block.rows.length}}|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|{{?}}
-{{~ block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.restrictions||'none'}}|{{=p.description||'none'}}|
+{{? block.rows.length}}|Name|Type|Required|Description|
+|---|---|---|---|{{?}}
+{{~ block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.description||'none'}}|
 {{~}}
 {{~}}
 {{? (blocks[0].rows.length === 0) && (blocks.length === 1) }}
