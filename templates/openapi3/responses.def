@@ -48,9 +48,9 @@ Status Code **{{=response.status}}**
 {{~ blocks :block}}
 {{? block.title }}*{{=block.title}}*
 {{?}}
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-{{~block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.restrictions||'none'}}|{{=p.description||'none'}}|
+|Name|Type|Description|
+|---|---|---|
+{{~block.rows :p}}|{{=p.displayName}} {{? p.required === true}}<br><b>Mandatory</b>{{?}}|{{=p.safeType}}|{{=p.description||'none'}}|
 {{~}}
 {{~}}
 {{?}}

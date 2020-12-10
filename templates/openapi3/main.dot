@@ -77,19 +77,21 @@
 <a href="{{=block.externalDocs.url}}">{{=block.externalDocs.description||'External documentation'}}</a>
 {{?}}
 
+{{? enums.length === 0}}
 {{? block===blocks[0] }}
 {{= data.tags.section }}
 
 ### Properties
 {{?}}
 
-{{? block.rows.length}}|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|{{?}}
-{{~ block.rows :p}}|{{=p.displayName}}|{{=p.safeType}}|{{=p.required}}|{{=p.restrictions||'none'}}|{{=p.description||'none'}}|
+{{? block.rows.length}}|Name|Type|Description|
+|---|---|---|{{?}}
+{{~ block.rows :p}}|{{=p.displayName}} {{? p.required === true}}<br><b>Mandatory</b>{{?}}|{{=p.safeType}}|{{=p.description||'none'}}|
 {{~}}
 {{~}}
 {{? (blocks[0].rows.length === 0) && (blocks.length === 1) }}
 *None*
+{{?}}
 {{?}}
 
 {{? enums.length > 0 }}
@@ -97,9 +99,9 @@
 
 #### Enumerated Values
 
-|Property|Value|
-|---|---|
-{{~ enums :e}}|{{=e.name}}|{{=data.utils.toPrimitive(e.value)}}|
+|Value|
+|---|
+{{~ enums :e}}|{{=data.utils.toPrimitive(e.value)}}|
 {{~}}
 
 {{= data.tags.endSection }}
