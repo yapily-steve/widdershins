@@ -1,76 +1,69 @@
 {{= data.tags.section }}
 
-<style>
-.row-color{ background: #383e42; }
-.row-color-alt{ background: #34393d; }
-</style>
-
-{{##def.fntest = function(param) {
-	return "Function " + param + " test worked!";
-}
-#}}
-
-{{#def.fntest("path")}}
-
 <div style="width: calc(50% - 0px); margin-right: 50%; clear: left">
     {{? data.parameters.find(header => header['in'] == 'path') }}
         <h3 id="{{=data.operationUniqueSlug}}-path-parameters" style="padding: 0px 28px">Path Parameters</h3>
-        {{~ data.parameters :p}}
-            {{? p.in == 'path' }}
-                <div style="overflow: hidden; margin: 0 14px;">
-                    <div style="width: 35%; padding: 10px; float: left">
-                        <normal>{{=p.name}}</normal><br>
-                        <small>{{=p.safeType}}</small>
-                    </div>
-                    <div style="margin-left: 35%; padding: 10px">
-                        <small>{{=p.description}}</small>
-                    </div>
+        {{~ data.parameters.filter(header => header['in'] == 'path') :p}}
+            <div style="overflow: hidden; margin: 0 14px;
+                        {{? data.parameters.indexOf(p) % 2 == 0 }}background: #383e42;{{?}}
+                        {{? data.parameters.indexOf(p) % 2 == 1 }}background: #34393d;{{?}}">
+                <div style="width: 40%; padding: 10px; float: left">
+                    <normal>{{=p.name}}</normal><br>
+                    <small>{{=p.safeType}}</small>
                 </div>
-            {{?}}
+                <div style="margin-left: 40%; padding: 10px">
+                    <small>{{=p.description}}</small>
+                </div>
+            </div>
         {{~}}
     {{?}}
     {{? data.parameters.find(header => header['in'] == 'header') }}
         <h3 id="{{=data.operationUniqueSlug}}-header-parameters" style="padding: 0px 28px">Header Parameters</h3>
-        {{~ data.parameters :p}}
-            {{? p.in == 'header' }}
-                <div style="overflow: hidden; margin: 0 14px;">
-                    <div style="width: 35%; padding: 10px; float: left">
-                        <normal>{{=p.name}}</normal><br>
-                        <small>{{=p.safeType}}</small>
-                    </div>
-                    <div style="margin-left: 35%; padding: 10px">
-                        <small>{{=p.description}}</small>
-                    </div>
+        {{~ data.parameters.filter(header => header['in'] == 'header') :p}}
+            <div style="overflow: hidden; margin: 0 14px;
+                        {{? data.parameters.indexOf(p) % 2 == 0 }}background: #383e42;{{?}}
+                        {{? data.parameters.indexOf(p) % 2 == 1 }}background: #34393d;{{?}}">
+                <div style="width: 40%; padding: 10px; float: left">
+                    <normal>{{=p.name}}</normal><br>
+                    <small>{{=p.safeType}}</small>
                 </div>
-            {{?}}
+                <div style="margin-left: 40%; padding: 10px">
+                    <small>{{=p.description}}</small>
+                </div>
+            </div>
         {{~}}
     {{?}}
     {{? data.parameters.find(header => header['in'] == 'query') }}
         <h3 id="{{=data.operationUniqueSlug}}-query-parameters" style="padding: 0px 28px">Query Parameters</h3>
-        {{~ data.parameters :p}}
-            {{? p.in == 'query' }}
-                <div style="overflow: hidden; margin: 0 14px;">
-                    <div style="width: 35%; padding: 10px; float: left">
-                        <normal>{{=p.name}}</normal><br>
-                        <small>{{=p.safeType}}</small>
-                    </div>
-                    <div style="margin-left: 35%; padding: 10px">
-                        <small>{{=p.description}}</small>
-                    </div>
+        {{~ data.parameters.filter(header => header['in'] == 'query') :p}}
+            <div style="overflow: hidden; margin: 0 14px;
+                        {{? data.parameters.indexOf(p) % 2 == 0 }}background: #383e42;{{?}}
+                        {{? data.parameters.indexOf(p) % 2 == 1 }}background: #34393d;{{?}}">
+                <div style="width: 40%; padding: 10px; float: left">
+                    <normal>{{=p.name}}</normal><br>
+                    <small>{{=p.safeType}}</small>
                 </div>
-            {{?}}
+                <div style="margin-left: 40%; padding: 10px">
+                    <small>{{=p.description}}</small>
+                </div>
+            </div>
         {{~}}
     {{?}}
     {{? data.parameters.find(header => header['in'] == 'body') }}
         <h3 id="{{=data.operationUniqueSlug}}-request-body" style="padding: 0px 28px">Request Body Schema</h3>
         {{~ data.parameters :p}}
             {{? p.in == 'body' }}
-                <div style="overflow: hidden; margin: 0 14px;">
-                    <div style="width: 35%; padding: 10px; float: left">
+                <div style="overflow: hidden; margin: 0 14px; background: #383e42">
+                    <div style="width: 40%; padding: 10px; float: left">
                         <normal>{{=p.name}}</normal><br>
+                        <small>
+                            <a href="/api/{{=p.safeType.split('(')[1].split(')')[0] }}">
+                            {{=p.safeType.split('[')[1].split(']')[0] }}
+                            </a>
+                        </small>
                     </div>
-                    <div style="margin-left: 35%; padding: 10px">
-                        <small><b>Mandatory</b>. The request body<br>{{=p.safeType.split('(')[1] }}</small>
+                    <div style="margin-left: 40%; padding: 10px">
+                        <small><b>Mandatory</b>. The request body</small>
                     </div>
                 </div>
             {{?}}

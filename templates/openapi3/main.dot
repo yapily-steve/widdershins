@@ -84,9 +84,9 @@
 ### Properties
 {{?}}
 
-{{? block.rows.length}}|Name|Type|Description|
+{{? block.rows.length}}|Property|Description|
 |---|---|---|{{?}}
-{{~ block.rows :p}}|{{=p.displayName}} {{? p.required === true}}<br><b>Mandatory</b>{{?}}|{{=p.safeType}}|{{=p.description||'none'}}|
+{{~ block.rows :p}}|{{=p.displayName}} <br>{{=p.safeType}}|{{=p.description||'none'}}|
 {{~}}
 {{~}}
 {{? (blocks[0].rows.length === 0) && (blocks.length === 1) }}
