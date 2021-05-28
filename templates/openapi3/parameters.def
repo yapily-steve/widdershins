@@ -1,10 +1,83 @@
 {{= data.tags.section }}
-<h3 id="{{=data.operationUniqueSlug}}-parameters">Parameters</h3>
 
-|Name|In|Type|Description|
-|---|---|---|---|
-{{~ data.parameters :p}}|{{=p.name}} {{? p.required === true}}<br><b>Mandatory</b>{{?}}|{{=p.in}}|{{=p.safeType}}|{{=p.shortDesc || 'none'}}|
-{{~}}
+<style>
+.row-color{ background: #383e42; }
+.row-color-alt{ background: #34393d; }
+</style>
+
+{{##def.fntest = function(param) {
+	return "Function " + param + " test worked!";
+}
+#}}
+
+{{#def.fntest("path")}}
+
+<div style="width: calc(50% - 0px); margin-right: 50%; clear: left">
+    {{? data.parameters.find(header => header['in'] == 'path') }}
+        <h3 id="{{=data.operationUniqueSlug}}-path-parameters" style="padding: 0px 28px">Path Parameters</h3>
+        {{~ data.parameters :p}}
+            {{? p.in == 'path' }}
+                <div style="overflow: hidden; margin: 0 14px;">
+                    <div style="width: 35%; padding: 10px; float: left">
+                        <normal>{{=p.name}}</normal><br>
+                        <small>{{=p.safeType}}</small>
+                    </div>
+                    <div style="margin-left: 35%; padding: 10px">
+                        <small>{{=p.description}}</small>
+                    </div>
+                </div>
+            {{?}}
+        {{~}}
+    {{?}}
+    {{? data.parameters.find(header => header['in'] == 'header') }}
+        <h3 id="{{=data.operationUniqueSlug}}-header-parameters" style="padding: 0px 28px">Header Parameters</h3>
+        {{~ data.parameters :p}}
+            {{? p.in == 'header' }}
+                <div style="overflow: hidden; margin: 0 14px;">
+                    <div style="width: 35%; padding: 10px; float: left">
+                        <normal>{{=p.name}}</normal><br>
+                        <small>{{=p.safeType}}</small>
+                    </div>
+                    <div style="margin-left: 35%; padding: 10px">
+                        <small>{{=p.description}}</small>
+                    </div>
+                </div>
+            {{?}}
+        {{~}}
+    {{?}}
+    {{? data.parameters.find(header => header['in'] == 'query') }}
+        <h3 id="{{=data.operationUniqueSlug}}-query-parameters" style="padding: 0px 28px">Query Parameters</h3>
+        {{~ data.parameters :p}}
+            {{? p.in == 'query' }}
+                <div style="overflow: hidden; margin: 0 14px;">
+                    <div style="width: 35%; padding: 10px; float: left">
+                        <normal>{{=p.name}}</normal><br>
+                        <small>{{=p.safeType}}</small>
+                    </div>
+                    <div style="margin-left: 35%; padding: 10px">
+                        <small>{{=p.description}}</small>
+                    </div>
+                </div>
+            {{?}}
+        {{~}}
+    {{?}}
+    {{? data.parameters.find(header => header['in'] == 'body') }}
+        <h3 id="{{=data.operationUniqueSlug}}-request-body" style="padding: 0px 28px">Request Body Schema</h3>
+        {{~ data.parameters :p}}
+            {{? p.in == 'body' }}
+                <div style="overflow: hidden; margin: 0 14px;">
+                    <div style="width: 35%; padding: 10px; float: left">
+                        <normal>{{=p.name}}</normal><br>
+                    </div>
+                    <div style="margin-left: 35%; padding: 10px">
+                        <small><b>Mandatory</b>. The request body<br>{{=p.safeType.split('(')[1] }}</small>
+                    </div>
+                </div>
+            {{?}}
+        {{~}}
+    {{?}}
+</div>
+
 
 {{? data.longDescs }}
 #### Detailed descriptions
